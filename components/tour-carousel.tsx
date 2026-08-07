@@ -14,16 +14,14 @@ const tours = [
 
 export function TourCarousel() {
   const track = useRef<HTMLDivElement>(null);
-  const [canMoveBack, setCanMoveBack] = useState(false);
-  const [canMoveForward, setCanMoveForward] = useState(true);
+  const [hasOverflow, setHasOverflow] = useState(false);
 
   const updateControls = useCallback(() => {
     const element = track.current;
     if (!element) return;
 
     const tolerance = 2;
-    setCanMoveBack(element.scrollLeft > tolerance);
-    setCanMoveForward(element.scrollLeft < element.scrollWidth - element.clientWidth - tolerance);
+    setHasOverflow(element.scrollWidth > element.clientWidth + tolerance);
   }, []);
 
   useEffect(() => {
@@ -50,7 +48,16 @@ export function TourCarousel() {
     const distance = (firstCard?.getBoundingClientRect().width ?? element.clientWidth * 0.82) + gap;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    element.scrollBy({ left: direction * distance, behavior: reduceMotion ? "auto" : "smooth" });
+    const maxScroll = element.scrollWidth - element.clientWidth;
+    const atStart = element.scrollLeft <= 2;
+    const atEnd = element.scrollLeft >= maxScroll - 2;
+    const nextPosition = direction === 1 && atEnd
+      ? 0
+      : direction === -1 && atStart
+        ? maxScroll
+        : Math.min(maxScroll, Math.max(0, element.scrollLeft + direction * distance));
+
+    element.scrollTo({ left: nextPosition, behavior: reduceMotion ? "auto" : "smooth" });
   };
 
   return (
@@ -59,8 +66,8 @@ export function TourCarousel() {
         <Image src="/assets/gradinet_7.png" alt="" fill sizes="15rem" />
       </div>
       <div className="tour-carousel__controls" aria-label="Featured tour controls">
-        <button type="button" onClick={() => move(-1)} aria-label="Previous tour" disabled={!canMoveBack}><ArrowLeft aria-hidden="true" /></button>
-        <button type="button" onClick={() => move(1)} aria-label="Next tour" disabled={!canMoveForward}><ArrowRight aria-hidden="true" /></button>
+        <button type="button" onClick={() => move(-1)} aria-label="Previous tour" disabled={!hasOverflow}><ArrowLeft aria-hidden="true" /></button>
+        <button type="button" onClick={() => move(1)} aria-label="Next tour" disabled={!hasOverflow}><ArrowRight aria-hidden="true" /></button>
       </div>
       <div className="tour-carousel__track" ref={track}>
         {tours.map((tour) => {

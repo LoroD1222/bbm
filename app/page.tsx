@@ -201,7 +201,7 @@ export default function Home() {
                 <div>
                   <ArrowLink href="#contact">Plan My Tanzania Trip</ArrowLink>
                   <a href="mailto:info@bbmsafaris.com"><Mail aria-hidden="true" /> info@bbmsafaris.com</a>
-                  <a href="tel:+255757662052"><Phone aria-hidden="true" /> +255 757 662 052</a>
+                  <a href="https://wa.me/255757662052" target="_blank" rel="noreferrer"><Phone aria-hidden="true" /> +255 757 662 052</a>
                 </div>
               </div>
             </div>
@@ -280,7 +280,7 @@ export default function Home() {
             <div className="footer__brand"><LogoMark /><p>Based in Arusha, Tanzania. We specialize in tailor-made private tours combining the legendary northern circuit parks, mountain climbing, and idyllic Indian Ocean islands.</p></div>
             <div><h2>Tours</h2><a href="#tours">Classic Safari</a><a href="#tours">Kilimanjaro Routes</a><a href="#tours">Zanzibar Getaway</a><a href="#contact">Custom Itineraries</a></div>
             <div><h2>Locations</h2><a href="#destinations">Serengeti</a><a href="#destinations">Ngorongoro Crater</a><a href="#destinations">Mount Kilimanjaro</a><a href="#destinations">Stone Town</a></div>
-            <div><h2>Contact Us</h2><a href="mailto:info@bbmsafaris.com"><Mail aria-hidden="true" />info@bbmsafaris.com</a><a href="tel:+255757662052"><Phone aria-hidden="true" />+255 757 662 052</a><p>Arusha, Tanzania — Gateway to Safari</p></div>
+            <div><h2>Contact Us</h2><a href="mailto:info@bbmsafaris.com"><Mail aria-hidden="true" />info@bbmsafaris.com</a><a href="https://wa.me/255757662052" target="_blank" rel="noreferrer"><Phone aria-hidden="true" />+255 757 662 052</a><p>Arusha, Tanzania — Gateway to Safari</p></div>
           </div>
           <div className="shell footer__bottom"><span>© 2026 BBM Safaris Limited. All rights reserved. Registered Operator in Tanzania.</span><nav aria-label="Social media"><a href="#top">Facebook</a><a href="#top">Instagram</a><a href="#top">TripAdvisor</a></nav></div>
         </footer>

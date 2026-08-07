@@ -13,7 +13,7 @@ function matchesCategory(category: string, journeyCategory: string) {
     "All Trips": [],
     Safari: ["Safari", "Private safari", "Wildlife"],
     "Kilimanjaro Treks": ["Mountain trek"],
-    "Safari + Zanzibar": ["Safari + Beach"],
+    "Safari + Zanzibar": ["Safari + Beach", "Safari + Zanzibar"],
     "Beach Escapes": ["Beach"],
     "Family Trips": ["Family"],
     "Honeymoon Specials": ["Honeymoon"],
@@ -25,20 +25,13 @@ function matchesCategory(category: string, journeyCategory: string) {
 export function TripsExplorer() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<(typeof categories)[number]>("All Trips");
-  const [duration, setDuration] = useState("all");
-  const [budget, setBudget] = useState("all");
-  const [destination, setDestination] = useState("");
 
   const visible = useMemo(() => journeys.filter((journey) => {
     const searchText = `${journey.title} ${journey.description} ${journey.category}`.toLowerCase();
-    const price = Number(journey.price.replace(/[^0-9]/g, ""));
-    const durationMatch = duration === "all" || (duration === "short" ? Number(journey.duration.split(" ")[0]) <= 5 : Number(journey.duration.split(" ")[0]) > 5);
-    const budgetMatch = budget === "all" || (budget === "under-2000" ? price < 2000 : budget === "2000-3500" ? price >= 2000 && price <= 3500 : price > 3500);
-    const destinationMatch = !destination || searchText.includes(destination.toLowerCase());
-    return searchText.includes(query.trim().toLowerCase()) && destinationMatch && matchesCategory(category, journey.category) && durationMatch && budgetMatch;
-  }), [budget, category, destination, duration, query]);
+    return searchText.includes(query.trim().toLowerCase()) && matchesCategory(category, journey.category);
+  }), [category, query]);
 
-  const clear = () => { setQuery(""); setCategory("All Trips"); setDuration("all"); setBudget("all"); setDestination(""); };
+  const clear = () => { setQuery(""); setCategory("All Trips"); };
 
   useEffect(() => {
     const filterByTravelStyle = (event: MouseEvent) => {
@@ -49,9 +42,6 @@ export function TripsExplorer() {
       if (!nextCategory || !categories.includes(nextCategory as (typeof categories)[number])) return;
 
       setQuery("");
-      setDuration("all");
-      setBudget("all");
-      setDestination("");
       setCategory(nextCategory as (typeof categories)[number]);
     };
 
@@ -66,13 +56,6 @@ export function TripsExplorer() {
           <form className="trips-filter__search" onSubmit={(event) => event.preventDefault()} role="search">
             <Search aria-hidden="true" /><label className="sr-only" htmlFor="trip-search">Search journeys</label><input id="trip-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search trips, parks, or destinations..." /><button type="submit">Find Journeys</button>
           </form>
-          <div className="trips-filter__selects">
-            <label>Trip Type<select value={category} onChange={(event) => setCategory(event.target.value as (typeof categories)[number])}>{categories.map((item) => <option key={item}>{item}</option>)}</select></label>
-            <label>Duration<select value={duration} onChange={(event) => setDuration(event.target.value)}><option value="all">Any duration</option><option value="short">Up to 5 days</option><option value="long">6+ days</option></select></label>
-            <label>Destination<select value={destination} onChange={(event) => setDestination(event.target.value)}><option value="">Any destination</option><option value="Serengeti">Serengeti</option><option value="Kilimanjaro">Kilimanjaro</option><option value="Zanzibar">Zanzibar</option><option value="Ngorongoro">Ngorongoro</option></select></label>
-            <label>Budget<select value={budget} onChange={(event) => setBudget(event.target.value)}><option value="all">Any budget</option><option value="under-2000">Under $2,000</option><option value="2000-3500">$2,000–$3,500</option><option value="over-3500">Over $3,500</option></select></label>
-            <label>Best Time to Travel<select defaultValue="all"><option value="all">All year</option><option>June–October</option><option>December–March</option><option>April–May</option></select></label>
-          </div>
           <div className="trips-filter__pills" aria-label="Journey categories">{categories.map((item) => <button className={category === item ? "is-active" : ""} type="button" key={item} onClick={() => setCategory(item)}>{item}</button>)}</div>
           <div className="trips-filter__result"><strong>Showing {visible.length} Unforgettable {visible.length === 1 ? "Journey" : "Journeys"}</strong><span /></div>
         </div>

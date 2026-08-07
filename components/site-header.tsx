@@ -38,7 +38,7 @@ export function SiteHeader() {
 
         <div className="site-header__contact">
           <a href="mailto:info@bbmsafaris.com"><Mail aria-hidden="true" />info@bbmsafaris.com</a>
-          <a href="tel:+255757662052"><MessageCircle aria-hidden="true" />+255 757 662 052</a>
+          <a href="https://wa.me/255757662052" target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" />+255 757 662 052</a>
           <Link className="site-header__desktop-cta" href="/#contact">
             <span>Plan My Tanzania Trip</span>
             <span aria-hidden="true"><ArrowUpRight /></span>
