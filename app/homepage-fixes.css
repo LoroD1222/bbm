@@ -1,0 +1,13 @@
+.hero .cta-link--secondary:hover {
+  color: var(--ink);
+  background: var(--yellow);
+}
+
+.hero .cta-link--secondary .cta-link__icon {
+  transition: color var(--fast) linear, background var(--fast) linear;
+}
+
+.hero .cta-link--secondary:hover .cta-link__icon {
+  color: var(--yellow);
+  background: var(--ink);
+}
