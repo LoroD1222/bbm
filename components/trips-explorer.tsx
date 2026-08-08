@@ -30,6 +30,7 @@ export function TripsExplorer() {
     const searchText = `${journey.title} ${journey.description} ${journey.category}`.toLowerCase();
     return searchText.includes(query.trim().toLowerCase()) && matchesCategory(category, journey.category);
   }), [category, query]);
+  const hasActiveFilter = category !== "All Trips" || query.trim().length > 0;
 
   const clear = () => { setQuery(""); setCategory("All Trips"); };
 
@@ -63,7 +64,7 @@ export function TripsExplorer() {
       <section className="all-trips-section" id="all-trips">
         <div className="journey-shell">
           <div className="journey-heading journey-heading--left"><p>Complete Catalogue</p><h2>Explore All Journeys</h2></div>
-          {visible.length ? <div className="all-trips-grid">{visible.map((journey, index) => <TripCard key={journey.slug} journey={journey} priority={index === 0} />)}</div> : <div className="trips-empty" role="status"><Search aria-hidden="true" /><h3>No journeys match those filters.</h3><p>Try a broader search or let our local team design one around you.</p><button type="button" onClick={clear}><X aria-hidden="true" />Clear filters</button></div>}
+          {visible.length ? <div className={`all-trips-grid${hasActiveFilter ? " is-filtered" : ""}`}>{visible.map((journey, index) => <TripCard key={journey.slug} journey={journey} priority={index === 0} />)}</div> : <div className="trips-empty" role="status"><Search aria-hidden="true" /><h3>No journeys match those filters.</h3><p>Try a broader search or let our local team design one around you.</p><button type="button" onClick={clear}><X aria-hidden="true" />Clear filters</button></div>}
         </div>
       </section>
     </>

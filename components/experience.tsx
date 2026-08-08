@@ -4,11 +4,14 @@ import { useEffect } from "react";
 
 export function Experience({ children }: Readonly<{ children: React.ReactNode }>) {
   useEffect(() => {
-    const elements = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    const revealAll = () => {
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-revealed)").forEach((element) => element.classList.add("is-revealed"));
+    };
+
     if (reducedMotion || !("IntersectionObserver" in window)) {
-      elements.forEach((element) => element.classList.add("is-revealed"));
+      revealAll();
       return;
     }
 
@@ -24,8 +27,17 @@ export function Experience({ children }: Readonly<{ children: React.ReactNode }>
       { rootMargin: "0px 0px -12%", threshold: 0.08 },
     );
 
-    elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+    const observePending = () => {
+      document.querySelectorAll<HTMLElement>("[data-reveal]:not(.is-revealed)").forEach((element) => observer.observe(element));
+    };
+    observePending();
+
+    const mutations = new MutationObserver(observePending);
+    mutations.observe(document.body, { childList: true, subtree: true });
+    return () => {
+      mutations.disconnect();
+      observer.disconnect();
+    };
   }, []);
 
   return <>{children}</>;

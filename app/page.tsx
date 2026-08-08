@@ -45,10 +45,10 @@ const destinations = [
 ] as const;
 
 const planningSteps = [
-  { number: "1", title: "Tell Us Your Dream Trip", text: "Share your dates, budget and interests through a quick enquiry.", icon: Send },
-  { number: "2", title: "Tell Us Your Dream Trip", text: "Share your dates, budget and interests through a quick enquiry.", icon: FileText },
-  { number: "3", title: "Tell Us Your Dream Trip", text: "Share your dates, budget and interests through a quick enquiry.", icon: RefreshCw },
-  { number: "4", title: "Tell Us Your Dream Trip", text: "Share your dates, budget and interests through a quick enquiry.", icon: CalendarCheck },
+  { number: "01", title: "Tell us what you're picturing", text: "Fill in the form below with your rough dates, who's travelling, and whether you're drawn to safari, Kilimanjaro, Zanzibar, or a combination.", icon: Send },
+  { number: "02", title: "Get a real itinerary back", text: "We reply with a draft route and indicative pricing based on what you've told us — not a generic brochure.", icon: FileText },
+  { number: "03", title: "Refine it together", text: "Move parks around, add or drop Kilimanjaro or Zanzibar, adjust accommodation level — as many rounds as you need.", icon: RefreshCw },
+  { number: "04", title: "Book with a confirmed itinerary", text: "Once you're happy, we confirm dates, accommodation and vehicles, and send a final booking confirmation.", icon: CalendarCheck },
 ] as const;
 
 const reviews = [
@@ -129,7 +129,7 @@ export default function Home() {
         <section className="section expertise" id="about">
           <div className="shell expertise__layout">
             <div className="expertise__copy" data-reveal>
-              <p className="yellow-label">Working Process</p>
+                <p className="yellow-label">About us</p>
               <h2>Local Expertise. One Journey, Built Around You.</h2>
               <p>We&apos;re based in Arusha and plan every trip ourselves — parks, routes, pacing and accommodation adjusted to how you want to travel, not sold from a fixed brochure.</p>
               <ul>

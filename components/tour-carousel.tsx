@@ -1,15 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowLeft, ArrowRight, CalendarDays, Mountain, PawPrint, TreePalm } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const tours = [
-  { name: "Zanzibar Beach Escape", tag: "Beach", duration: "5 days / 4 nights", price: "$1,890 USD", image: "/assets/figma/reference/tour-beach.png", icon: TreePalm },
-  { name: "Kilimanjaro Summit Trek", tag: "Trekking", duration: "10 days / 9 nights", price: "$4,250 USD", image: "/assets/figma/reference/tour-kilimanjaro.png", icon: Mountain },
-  { name: "Ngorongoro Crater Safari", tag: "Wildlife", duration: "4 days / 3 nights", price: "$3,120 USD", image: "/assets/figma/reference/tour-wildlife.png", icon: PawPrint },
-  { name: "Serengeti Migration Safari", tag: "Wildlife", duration: "7 days / 6 nights", price: "$2,800 USD", image: "/assets/figma/pages/trip-08.png", icon: PawPrint },
-  { name: "Serengeti & Zanzibar Escape", tag: "Safari + Beach", duration: "10 days / 9 nights", price: "$3,200 USD", image: "/assets/figma/pages/trip-07.png", icon: TreePalm },
+  { name: "Zanzibar Beach Escape", tag: "Beach", duration: "5 days / 4 nights", price: "$1,890 USD", image: "/assets/figma/reference/tour-beach.png", icon: TreePalm, href: "/tours#all-trips" },
+  { name: "Kilimanjaro Summit Trek", tag: "Trekking", duration: "10 days / 9 nights", price: "$4,250 USD", image: "/assets/figma/reference/tour-kilimanjaro.png", icon: Mountain, href: "/tours#all-trips" },
+  { name: "Ngorongoro Crater Safari", tag: "Wildlife", duration: "4 days / 3 nights", price: "$3,120 USD", image: "/assets/figma/reference/tour-wildlife.png", icon: PawPrint, href: "/tours#all-trips" },
+  { name: "Serengeti Migration Safari", tag: "Wildlife", duration: "7 days / 6 nights", price: "$2,800 USD", image: "/assets/figma/pages/trip-08.png", icon: PawPrint, href: "/tours#all-trips" },
+  { name: "Serengeti & Zanzibar Escape", tag: "Safari + Beach", duration: "10 days / 9 nights", price: "$3,200 USD", image: "/assets/figma/pages/trip-07.png", icon: TreePalm, href: "/tours#all-trips" },
 ] as const;
 
 export function TourCarousel() {
@@ -74,7 +75,7 @@ export function TourCarousel() {
           const TourIcon = tour.icon;
 
           return (
-            <article className="tour-card" key={tour.name}>
+            <Link className="tour-card" href={tour.href} aria-label={`View ${tour.name}`} key={tour.name}>
               <div className="tour-card__image">
                 <Image src={tour.image} alt={tour.name} fill sizes="(max-width: 47.5rem) 82vw, 23rem" />
                 <span><TourIcon aria-hidden="true" />{tour.tag}</span>
@@ -84,7 +85,7 @@ export function TourCarousel() {
                 <h3>{tour.name}</h3>
                 <strong><span>From</span>{tour.price}</strong>
               </div>
-            </article>
+            </Link>
           );
         })}
       </div>
