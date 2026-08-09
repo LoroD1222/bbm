@@ -85,7 +85,7 @@ export default function Home() {
               <p className="hero__intro">BBM Safaris is a Tanzania-based operator that plans journeys across the Serengeti and Ngorongoro Crater, up Mount Kilimanjaro, and onto the beaches of Zanzibar — combined into a single itinerary built around how you want to travel.</p>
               <div className="hero__actions">
                 <ArrowLink href="#contact">Plan My Tanzania Trip</ArrowLink>
-                <ArrowLink href="#tours" secondary>See more tours</ArrowLink>
+                <ArrowLink href="/tours" secondary>See more tours</ArrowLink>
               </div>
             </div>
 
@@ -118,8 +118,8 @@ export default function Home() {
               <h2>Explore <span className="sun-word sun-word--flag">Tanzania</span><br />Your Way</h2>
               <p>BBM Safaris is a Tanzania-based operator that plans journeys across the Serengeti and Ngorongoro Crater, up Mount Kilimanjaro, and onto the beaches of Zanzibar — combined into a single itinerary built around how you want to travel.</p>
               <div className="tours__actions">
-                <ArrowLink href="#destinations">See more tours</ArrowLink>
-                <a className="underlined-link" href="#destinations">See more tours <ArrowUpRight aria-hidden="true" /></a>
+                <ArrowLink href="/tours">See more tours</ArrowLink>
+                <a className="underlined-link" href="/tours">See more tours <ArrowUpRight aria-hidden="true" /></a>
               </div>
             </div>
             <TourCarousel />

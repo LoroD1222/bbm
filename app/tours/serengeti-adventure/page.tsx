@@ -49,7 +49,7 @@ export default function SerengetiAdventurePage() {
   return (
     <Experience>
       <main className="journeys-page detail-page" id="top">
-        <nav className="detail-subnav" aria-label="Trip page sections"><div className="journey-shell"><div><a href="#overview">Overview</a><a href="#itinerary">Itinerary</a><a href="#pricing">Pricing</a><a href="#included">Included</a><a href="#reviews">Reviews</a></div><p>From <strong>$1,650 USD</strong><a href="#enquiry">Book Trip</a></p></div></nav>
+        <nav className="detail-subnav" aria-label="Trip page sections"><div className="journey-shell"><div><a href="#overview">Overview</a><a href="#itinerary">Itinerary</a><a href="#pricing">Pricing</a><a href="#included">Included</a><a href="#reviews">Reviews</a></div><p>From <strong>$1,650 USD</strong><a href="#enquiry">Plan Your Trip</a></p></div></nav>
 
         <section className="detail-hero" aria-labelledby="detail-title">
           <div className="detail-pattern" aria-hidden="true" />

@@ -490,7 +490,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .trust p { gap: 0.125rem; font-size: 1.0625rem; }
   .trust p span { font-size: 0.9375rem; letter-spacing: .18em; }
 
-  .tours { height: 35.3125rem; overflow: hidden; }
+  .tours { height: 35.3125rem; overflow: visible; }
   .tours__layout { grid-template-columns: 29.625rem 71.5625rem; gap: 2.3125rem; align-items: center; height: 35.3125rem; }
   .tours__copy h2 { width: 29.625rem; font-size: 3.375rem; line-height: 1.16; }
   .tours__copy > p:not(.section-label) { width: 28.375rem; margin-top: 0.8125rem; font-size: 1.1875rem; line-height: 1.37; }
@@ -501,7 +501,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .tour-carousel { isolation: isolate; width: calc(100vw - max(2.25rem, calc(50vw - 46.75rem)) - 31.9375rem); }
   .tour-carousel__edge-gradient { position: absolute; z-index: 3; right: 0; top: 0; display: block; width: 15rem; height: 26.5625rem; pointer-events: none; }
   .tour-carousel__edge-gradient img { object-fit: fill; transition: none; }
-  .tour-carousel__track { justify-content: start; grid-auto-columns: 23rem; gap: 0.6875rem; overflow-x: auto; margin-left: 1.875rem; margin-bottom: 1.875rem; padding: 0; }
+  .tour-carousel__track { justify-content: start; grid-auto-columns: 23rem; gap: 0.6875rem; overflow-x: auto; margin-left: 1.875rem; margin-bottom: 1.875rem; padding: 0.625rem 0 1.875rem; }
   .tour-carousel__controls { inset: 0; display: block; pointer-events: none; transform: none; }
   .tour-carousel__controls button { position: absolute; top: 50%; display: grid; width: 2.375rem; height: 2.375rem; border: 0; box-shadow: none; pointer-events: auto; }
   .tour-carousel__controls button:first-child { left: -0.8125rem; background: transparent; transform: translate(-50%,-50%); }
