@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.3.0",
+    "@sanity/image-url": "^2.1.1",
     "@tailwindcss/postcss": "latest",
     "lucide-react": "latest",
     "next": "latest",
+    "next-sanity": "^13.3.1",
     "react": "latest",
     "react-dom": "latest",
     "tailwindcss": "latest"

@@ -9,7 +9,6 @@ import { LogoMark } from "./logo-mark";
 const links = [
   { href: "/tours", label: "Tours" },
   { href: "/#destinations", label: "Locations" },
-  { href: "/#plan", label: "Activities" },
   { href: "/#about", label: "About us" },
 ] as const;
 
@@ -33,13 +32,13 @@ export function SiteHeader() {
 
         <nav id="primary-navigation" className={`site-header__nav${isOpen ? " is-open" : ""}`} aria-label="Primary navigation">
           {links.map((link) => <Link key={link.href} href={link.href} aria-current={link.href === "/tours" && pathname.startsWith("/tours") ? "page" : undefined} onClick={() => setIsOpen(false)}>{link.label}</Link>)}
-          <Link className="site-header__mobile-cta" href="/#contact" onClick={() => setIsOpen(false)}>Plan My Tanzania Trip</Link>
+          <Link className="site-header__mobile-cta" href="/#contact" data-plan-trip onClick={() => setIsOpen(false)}>Plan My Tanzania Trip</Link>
         </nav>
 
         <div className="site-header__contact">
           <a href="mailto:info@bbmsafaris.com"><Mail aria-hidden="true" />info@bbmsafaris.com</a>
           <a href="https://wa.me/255757662052" target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" />+255 757 662 052</a>
-          <Link className="site-header__desktop-cta" href="/#contact">
+          <Link className="site-header__desktop-cta" href="/#contact" data-plan-trip>
             <span>Plan My Tanzania Trip</span>
             <span aria-hidden="true"><ArrowUpRight /></span>
           </Link>

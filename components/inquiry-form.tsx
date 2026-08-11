@@ -14,7 +14,7 @@ type FormErrors = Partial<Record<keyof FormState, string>>;
 
 const initialForm: FormState = { name: "", email: "", phone: "", trip: "" };
 
-export function InquiryForm() {
+export function InquiryForm({ title = "Plan Your Trip", buttonLabel = "Get Started" }: Readonly<{ title?: string; buttonLabel?: string }>) {
   const [values, setValues] = useState<FormState>(initialForm);
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
@@ -55,7 +55,7 @@ export function InquiryForm() {
 
   return (
     <form className="inquiry-form" noValidate onSubmit={handleSubmit} aria-label="Plan your Tanzania trip">
-      <h3>Plan Your Trip</h3>
+      <h3>{title}</h3>
       <div className="inquiry-form__grid">
         <label>
           <span>Full Name</span>
@@ -84,7 +84,7 @@ export function InquiryForm() {
         </label>
       </div>
       <button className="inquiry-form__submit" type="submit" disabled={status === "loading"}>
-        {status === "loading" ? <><LoaderCircle className="spinner" aria-hidden="true" /> Sending…</> : "Get Started"}
+        {status === "loading" ? <><LoaderCircle className="spinner" aria-hidden="true" /> Sending…</> : buttonLabel}
       </button>
     </form>
   );

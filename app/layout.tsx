@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { PlanTripModal } from "@/components/plan-trip-modal";
 import { SiteHeader } from "@/components/site-header";
 import "./globals.css";
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body><SiteHeader />{children}</body>
+      <body><PlanTripModal><SiteHeader />{children}</PlanTripModal></body>
     </html>
   );
 }

@@ -5,12 +5,13 @@ import { JourneyButton } from "@/components/journey-button";
 import { JourneyFooter } from "@/components/journey-footer";
 import { JourneyForm } from "@/components/journey-form";
 import { TripsExplorer } from "@/components/trips-explorer";
+import {getTripsForList} from "@/lib/trip-data";
 
 const travelStyles = [
-  { title: "Wildlife Safaris", text: "Untamed natural encounters.", image: "/assets/figma/pages/style-wildlife.png", category: "Safari" },
-  { title: "Kilimanjaro Treks", text: "Climb the roof of Africa.", image: "/assets/figma/pages/style-kilimanjaro.png", category: "Kilimanjaro Treks" },
-  { title: "Safari + Beach", text: "Bush encounters & coastal relaxation.", image: "/assets/figma/pages/style-bush-beach.png", category: "Safari + Zanzibar" },
-  { title: "Tailor-Made Journeys", text: "Built 100% around your dream.", image: "/assets/figma/pages/style-tailor.png", category: "All Trips" },
+  { title: "Wildlife Safaris", text: "Untamed natural encounters.", image: "/assets/figma/pages/style-wildlife.png", category: "wildlife-safari" },
+  { title: "Kilimanjaro Treks", text: "Climb the roof of Africa.", image: "/assets/figma/pages/style-kilimanjaro.png", category: "mountain-trekking" },
+  { title: "Safari + Beach", text: "Bush encounters & coastal relaxation.", image: "/assets/figma/pages/style-bush-beach.png", category: "safari-plus-beach" },
+  { title: "Tailor-Made Journeys", text: "Built 100% around your dream.", image: "/assets/figma/pages/style-tailor.png", category: "private-safari" },
 ] as const;
 
 const benefits = [
@@ -26,7 +27,7 @@ const reviews = [
   { image: "/assets/figma/pages/trips-review-03.png", quote: "Zanzibar was pure paradise. Combining our dusty game drives with quiet, breezy beaches in Stone Town was the ultimate itinerary layout. Having a single contact made it so stress-free.", name: "Elena Petrova", trip: "Wildlife & Zanzibar - 10 Days" },
 ] as const;
 
-export default function ToursPage() {
+export default async function ToursPage() {
   return (
     <Experience>
       <main className="journeys-page" id="top">
@@ -46,7 +47,7 @@ export default function ToursPage() {
           </div>
         </section>
 
-        <TripsExplorer />
+        <TripsExplorer journeys={await getTripsForList()} />
 
         <section className="travel-styles">
           <div className="journey-shell">

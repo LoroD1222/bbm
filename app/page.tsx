@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowUpRight,
   CalendarCheck,
@@ -26,6 +27,7 @@ const assets = {
   heroCenter: "/assets/figma/reference/hero-center.png",
   heroRight: "/assets/figma/reference/hero-right.png",
   expertise: "/assets/figma/reference/expertise-safari.png",
+  expertiseMobile: "/assets/mobile-about-safari.png",
   planningTop: "/assets/figma/reference/planning-top.png",
   planningMain: "/assets/figma/reference/planning-main.png",
   planningBottom: "/assets/figma/reference/planning-bottom.png",
@@ -65,7 +67,7 @@ const team = [
 
 function ArrowLink({ href, children, secondary = false }: Readonly<{ href: string; children: React.ReactNode; secondary?: boolean }>) {
   return (
-    <a className={`cta-link${secondary ? " cta-link--secondary" : ""}`} href={href}>
+    <a className={`cta-link${secondary ? " cta-link--secondary" : ""}`} href={href} data-plan-trip={href === "#contact" || undefined}>
       <span>{children}</span>
       <span className="cta-link__icon" aria-hidden="true"><ArrowUpRight /></span>
     </a>
@@ -119,7 +121,7 @@ export default function Home() {
               <p>BBM Safaris is a Tanzania-based operator that plans journeys across the Serengeti and Ngorongoro Crater, up Mount Kilimanjaro, and onto the beaches of Zanzibar — combined into a single itinerary built around how you want to travel.</p>
               <div className="tours__actions">
                 <ArrowLink href="/tours">See more tours</ArrowLink>
-                <a className="underlined-link" href="/tours">See more tours <ArrowUpRight aria-hidden="true" /></a>
+                <Link className="underlined-link" href="/tours">See more tours <ArrowUpRight aria-hidden="true" /></Link>
               </div>
             </div>
             <TourCarousel />
@@ -141,7 +143,8 @@ export default function Home() {
             </div>
             <div className="expertise__visual" data-reveal>
               <div className="expertise__wash" />
-              <Image src={assets.expertise} alt="Safari vehicle and wildebeest on the plains" fill sizes="(max-width: 56.25rem) 100vw, 46.375rem" />
+              <Image className="expertise__image--desktop" src={assets.expertise} alt="Safari vehicle and wildebeest on the plains" fill sizes="(max-width: 56.25rem) 100vw, 46.375rem" />
+              <Image className="expertise__image--mobile" src={assets.expertiseMobile} alt="" fill sizes="100vw" />
               <div className="expertise__logo"><LogoMark /></div>
             </div>
           </div>

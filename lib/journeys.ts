@@ -1,12 +1,14 @@
+import type {TripType} from './trip-options';
+
 export type Journey = {
   slug: string;
-  category: string;
+  category: TripType;
   tag?: string;
   duration: string;
   title: string;
   description: string;
   price: string;
-  image: string;
+  image?: string;
 };
 
 const assetRoot = "/assets/figma/pages";
@@ -14,7 +16,7 @@ const assetRoot = "/assets/figma/pages";
 export const journeys: readonly Journey[] = [
   {
     slug: "serengeti-adventure",
-    category: "Private safari",
+    category: "private-safari",
     tag: "Best Seller",
     duration: "5 Days / 4 Nights",
     title: "4 Nights Serengeti Adventure",
@@ -24,7 +26,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "northern-circuit-safari",
-    category: "Safari",
+    category: "wildlife-safari",
     duration: "6 Days / 5 Nights",
     title: "6 Days Northern Circuit Safari",
     description: "A premium expedition covering iconic parks of the Northern circuit.",
@@ -33,7 +35,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "ngorongoro-crater-escape",
-    category: "Wildlife",
+    category: "wildlife-safari",
     duration: "4 Days / 3 Nights",
     title: "Ngorongoro Crater Escape",
     description: "Descend into the caldera of Africa's lost garden of Eden.",
@@ -42,7 +44,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "tarangire-manyara-safari",
-    category: "Wildlife",
+    category: "wildlife-safari",
     duration: "3 Days / 2 Nights",
     title: "Tarangire & Lake Manyara Safari",
     description: "Famed for tree-climbing lions and towering ancient baobab structures.",
@@ -51,7 +53,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "kilimanjaro-summit-trek",
-    category: "Mountain trek",
+    category: "mountain-trekking",
     duration: "5 Days / 4 Nights",
     title: "5-Day Kilimanjaro Summit Trek",
     description: "Uncover peak beauty via the scenic, high-pacing Marangu trail.",
@@ -60,7 +62,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "zanzibar-beach-escape",
-    category: "Beach",
+    category: "beach",
     duration: "5 Days / 4 Nights",
     title: "Zanzibar Beach Escape",
     description: "Immerse in historic spice tours and pristine coral sand beaches.",
@@ -69,7 +71,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "serengeti-zanzibar-escape",
-    category: "Safari + Beach",
+    category: "safari-plus-beach",
     tag: "Beach + Safari",
     duration: "10 Days / 9 Nights",
     title: "Serengeti & Zanzibar Escape",
@@ -79,7 +81,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "great-migration-safari",
-    category: "Wildlife",
+    category: "wildlife-safari",
     tag: "Best Seller",
     duration: "7 Days / 6 Nights",
     title: "Great Migration Safari",
@@ -89,7 +91,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "tanzania-family-safari",
-    category: "Family",
+    category: "family",
     tag: "Family Favourite",
     duration: "7 Days / 6 Nights",
     title: "Tanzania Family Safari",
@@ -99,7 +101,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "romantic-tanzania-honeymoon",
-    category: "Honeymoon",
+    category: "honeymoon",
     duration: "8 Days / 7 Nights",
     title: "Romantic Tanzania Honeymoon",
     description: "Complete with luxury glamping, private bush dinners, and infinity pools.",
@@ -108,7 +110,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "southern-tanzania-wilderness",
-    category: "Safari",
+    category: "wildlife-safari",
     duration: "6 Days / 5 Nights",
     title: "Southern Tanzania Wilderness Safari",
     description: "Navigate the wild Selous and Ruaha rivers for raw off-grid magic.",
@@ -117,7 +119,7 @@ export const journeys: readonly Journey[] = [
   },
   {
     slug: "luxury-tanzania-signature",
-    category: "Luxury",
+    category: "luxury",
     tag: "Luxury",
     duration: "10 Days / 9 Nights",
     title: "Luxury Tanzania Signature Journey",

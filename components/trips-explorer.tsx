@@ -2,37 +2,27 @@
 
 import { Search, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { journeys } from "@/lib/journeys";
+import type { Journey } from "@/lib/journeys";
+import { tripTypeLabel, tripTypeOptions, type TripType } from "@/lib/trip-options";
 import { TripCard } from "./trip-card";
 
-const categories = ["All Trips", "Safari", "Kilimanjaro Treks", "Safari + Zanzibar", "Beach Escapes", "Family Trips", "Honeymoon Specials", "Luxury Escapes"] as const;
+const categories = ["all", ...tripTypeOptions.map(({ value }) => value)] as const;
 
-function matchesCategory(category: string, journeyCategory: string) {
-  if (category === "All Trips") return true;
-  const rules: Record<(typeof categories)[number], readonly string[]> = {
-    "All Trips": [],
-    Safari: ["Safari", "Private safari", "Wildlife"],
-    "Kilimanjaro Treks": ["Mountain trek"],
-    "Safari + Zanzibar": ["Safari + Beach", "Safari + Zanzibar"],
-    "Beach Escapes": ["Beach"],
-    "Family Trips": ["Family"],
-    "Honeymoon Specials": ["Honeymoon"],
-    "Luxury Escapes": ["Luxury"],
-  };
-  return rules[category as (typeof categories)[number]]?.includes(journeyCategory) ?? true;
+function categoryLabel(category: "all" | TripType) {
+  return category === "all" ? "All Trips" : tripTypeLabel[category];
 }
 
-export function TripsExplorer() {
+export function TripsExplorer({ journeys }: Readonly<{ journeys: readonly Journey[] }>) {
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState<(typeof categories)[number]>("All Trips");
+  const [category, setCategory] = useState<"all" | TripType>("all");
 
   const visible = useMemo(() => journeys.filter((journey) => {
     const searchText = `${journey.title} ${journey.description} ${journey.category}`.toLowerCase();
-    return searchText.includes(query.trim().toLowerCase()) && matchesCategory(category, journey.category);
-  }), [category, query]);
-  const hasActiveFilter = category !== "All Trips" || query.trim().length > 0;
+    return searchText.includes(query.trim().toLowerCase()) && (category === "all" || category === journey.category);
+  }), [category, journeys, query]);
+  const hasActiveFilter = category !== "all" || query.trim().length > 0;
 
-  const clear = () => { setQuery(""); setCategory("All Trips"); };
+  const clear = () => { setQuery(""); setCategory("all"); };
 
   useEffect(() => {
     const filterByTravelStyle = (event: MouseEvent) => {
@@ -40,10 +30,10 @@ export function TripsExplorer() {
 
       const trigger = event.target.closest<HTMLElement>("[data-trip-category]");
       const nextCategory = trigger?.dataset.tripCategory;
-      if (!nextCategory || !categories.includes(nextCategory as (typeof categories)[number])) return;
+      if (!nextCategory || !tripTypeOptions.some(({value}) => value === nextCategory)) return;
 
       setQuery("");
-      setCategory(nextCategory as (typeof categories)[number]);
+      setCategory(nextCategory as TripType);
     };
 
     document.addEventListener("click", filterByTravelStyle);
@@ -57,7 +47,7 @@ export function TripsExplorer() {
           <form className="trips-filter__search" onSubmit={(event) => event.preventDefault()} role="search">
             <Search aria-hidden="true" /><label className="sr-only" htmlFor="trip-search">Search journeys</label><input id="trip-search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search trips, parks, or destinations..." /><button type="submit">Find Journeys</button>
           </form>
-          <div className="trips-filter__pills" aria-label="Journey categories">{categories.map((item) => <button className={category === item ? "is-active" : ""} type="button" key={item} onClick={() => setCategory(item)}>{item}</button>)}</div>
+          <div className="trips-filter__pills" aria-label="Journey categories">{categories.map((item) => <button className={category === item ? "is-active" : ""} type="button" key={item} onClick={() => setCategory(item)}>{categoryLabel(item)}</button>)}</div>
           <div className="trips-filter__result"><strong>Showing {visible.length} Unforgettable {visible.length === 1 ? "Journey" : "Journeys"}</strong><span /></div>
         </div>
       </section>

@@ -1,28 +1,17 @@
-import { ArrowUpRight, Clock3, Crown, Heart, Mountain, PawPrint, Sparkles, TreePalm, UsersRound } from "lucide-react";
+import { ArrowUpRight, Clock3 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Journey } from "@/lib/journeys";
-
-const categoryIcons: Record<string, typeof PawPrint> = {
-  "Private safari": PawPrint,
-  Safari: PawPrint,
-  Wildlife: PawPrint,
-  "Mountain trek": Mountain,
-  Beach: TreePalm,
-  "Safari + Beach": TreePalm,
-  Family: UsersRound,
-  Honeymoon: Heart,
-  Luxury: Crown,
-};
+import {tripTypeLabel} from "@/lib/trip-options";
+import {TripTypeIcon} from "./trip-type-icon";
 
 export function TripCard({ journey, priority = false }: Readonly<{ journey: Journey; priority?: boolean }>) {
-  const href = journey.slug === "serengeti-adventure" ? "/tours/serengeti-adventure" : "/#contact";
-  const CategoryIcon = categoryIcons[journey.category] ?? Sparkles;
+  const href = `/tours/${journey.slug}`;
   return (
     <article className="trip-card" data-reveal>
-      <Link className="trip-card__image" href={href} aria-label={`View ${journey.title}`}>
-        <Image src={journey.image} alt="" fill sizes="(max-width: 42.5rem) 92vw, (max-width: 63.75rem) 46vw, 30vw" priority={priority} />
-        <span className="trip-card__category"><CategoryIcon aria-hidden="true" />{journey.category}</span>
+      <Link className={`trip-card__image${journey.image ? "" : " trip-card__image--placeholder"}`} href={href} aria-label={`View ${journey.title}`}>
+        {journey.image && <Image src={journey.image} alt="" fill sizes="(max-width: 42.5rem) 92vw, (max-width: 63.75rem) 46vw, 30vw" priority={priority} />}
+        <span className="trip-card__category"><TripTypeIcon tripType={journey.category} aria-hidden="true" />{tripTypeLabel[journey.category]}</span>
         {journey.tag && <span className="trip-card__tag">{journey.tag}</span>}
       </Link>
       <div className="trip-card__body">
