@@ -1,6 +1,5 @@
 import {cache} from 'react'
 import type {Journey} from './journeys'
-import {journeys} from './journeys'
 import {RELATED_TRIPS_BY_TYPE_QUERY, TRIP_BY_SLUG_QUERY, TRIP_SLUGS_QUERY, TRIPS_FOR_LIST_QUERY} from './queries'
 import {client} from './sanity'
 import type {TripType} from './trip-options'
@@ -11,7 +10,7 @@ export const getTripBySlug = cache(async (slug: string): Promise<TripPageData | 
   const trip = await client.fetch(
     TRIP_BY_SLUG_QUERY,
     {slug},
-    {next: {revalidate: 3600, tags: ['trip', `trip:${slug}`]}},
+    {cache: 'no-store'},
   )
 
   if (!trip) return null
@@ -19,7 +18,7 @@ export const getTripBySlug = cache(async (slug: string): Promise<TripPageData | 
   const relatedTrips = await client.fetch(
     RELATED_TRIPS_BY_TYPE_QUERY,
     {id: trip._id, tripType: trip.tripType},
-    {next: {revalidate: 3600, tags: ['trip', `trip-type:${trip.tripType}`]}},
+    {cache: 'no-store'},
   )
 
   return {...trip, relatedTrips}
@@ -40,16 +39,14 @@ const badgeLabel: Record<string, string> = {
   'luxury-pick': 'Luxury Pick',
 }
 
-/** The catalogue uses Sanity when trips exist, while retaining the local design fallback offline. */
+/** The catalogue is Sanity-backed. An outage must not reintroduce retired trip content. */
 export const getTripsForList = cache(async (): Promise<readonly Journey[]> => {
   try {
     const trips = await client.fetch<TRIPS_FOR_LIST_QUERY_RESULT>(
       TRIPS_FOR_LIST_QUERY,
       {},
-      {next: {revalidate: 3600, tags: ['trip']}},
+      {cache: 'no-store'},
     )
-
-    if (!trips.length) return journeys
 
     return trips.map((trip) => ({
       slug: trip.slug,
@@ -62,7 +59,7 @@ export const getTripsForList = cache(async (): Promise<readonly Journey[]> => {
       image: trip.imageUrl ?? undefined,
     }))
   } catch (error) {
-    console.error('Unable to load Sanity trips for the catalogue; using the local fallback.', error)
-    return journeys
+    console.error('Unable to load Sanity trips for the catalogue.', error)
+    return []
   }
 })

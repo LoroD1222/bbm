@@ -2,18 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CalendarDays, Mountain, PawPrint, TreePalm } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarDays } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { Journey } from "@/lib/journeys";
+import { tripTypeLabel } from "@/lib/trip-options";
+import { TripTypeIcon } from "./trip-type-icon";
 
-const tours = [
-  { name: "Zanzibar Beach Escape", tag: "Beach", duration: "5 days / 4 nights", price: "$1,890 USD", image: "/assets/figma/reference/tour-beach.png", icon: TreePalm, href: "/tours#all-trips" },
-  { name: "Kilimanjaro Summit Trek", tag: "Trekking", duration: "10 days / 9 nights", price: "$4,250 USD", image: "/assets/figma/reference/tour-kilimanjaro.png", icon: Mountain, href: "/tours#all-trips" },
-  { name: "Ngorongoro Crater Safari", tag: "Wildlife", duration: "4 days / 3 nights", price: "$3,120 USD", image: "/assets/figma/reference/tour-wildlife.png", icon: PawPrint, href: "/tours#all-trips" },
-  { name: "Serengeti Migration Safari", tag: "Wildlife", duration: "7 days / 6 nights", price: "$2,800 USD", image: "/assets/figma/pages/trip-08.png", icon: PawPrint, href: "/tours#all-trips" },
-  { name: "Serengeti & Zanzibar Escape", tag: "Safari + Beach", duration: "10 days / 9 nights", price: "$3,200 USD", image: "/assets/figma/pages/trip-07.png", icon: TreePalm, href: "/tours#all-trips" },
-] as const;
-
-export function TourCarousel() {
+export function TourCarousel({ tours }: Readonly<{ tours: readonly Journey[] }>) {
   const track = useRef<HTMLDivElement>(null);
   const [hasOverflow, setHasOverflow] = useState(false);
 
@@ -71,18 +66,18 @@ export function TourCarousel() {
         <button type="button" onClick={() => move(1)} aria-label="Next tour" disabled={!hasOverflow}><ArrowRight aria-hidden="true" /></button>
       </div>
       <div className="tour-carousel__track" ref={track}>
-        {tours.map((tour) => {
-          const TourIcon = tour.icon;
+        {tours.map((tour, index) => {
+          const href = `/tours/${tour.slug}`;
 
           return (
-            <Link className="tour-card" href={tour.href} aria-label={`View ${tour.name}`} key={tour.name}>
-              <div className="tour-card__image">
-                <Image src={tour.image} alt={tour.name} fill sizes="(max-width: 47.5rem) 82vw, 23rem" />
-                <span><TourIcon aria-hidden="true" />{tour.tag}</span>
+            <Link className="tour-card" href={href} aria-label={`View ${tour.title}`} key={tour.slug}>
+              <div className={`tour-card__image${tour.image ? "" : " tour-card__image--placeholder"}`}>
+                {tour.image && <Image src={tour.image} alt={tour.title} fill priority={index === 0} sizes="(max-width: 47.5rem) 82vw, 23rem" />}
+                <span><TripTypeIcon tripType={tour.category} aria-hidden="true" />{tripTypeLabel[tour.category]}</span>
               </div>
               <div className="tour-card__body">
                 <p><CalendarDays aria-hidden="true" />{tour.duration}</p>
-                <h3>{tour.name}</h3>
+                <h3>{tour.title}</h3>
                 <strong><span>From</span>{tour.price}</strong>
               </div>
             </Link>

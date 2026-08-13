@@ -139,7 +139,7 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
         <section className="detail-overview" id="overview">
           <div className="journey-shell">
             <div className="detail-overview__intro" data-reveal>
-              <div><p className="journey-eyebrow">The Experience</p><h2>Explore Tanzania at your own pace</h2><p>{trip.overview}</p></div>
+              <div><p className="journey-eyebrow journey-eyebrow--pill">The Experience</p><h2>Explore Tanzania at your own pace</h2><p>{trip.overview}</p></div>
               <aside><h3>Why you&apos;ll love this trip</h3><ul>{trip.highlights.map((highlight) => <li key={highlight}><Check aria-hidden="true" />{highlight}</li>)}</ul></aside>
             </div>
             <div className="detail-overview__facts">{overviewFacts.map((fact, index) => { const Icon = fact.icon; return <article key={fact.title} data-reveal style={{transitionDelay: `${index * 45}ms`}}><Icon aria-hidden="true" /><span>{fact.title}</span><strong>{fact.value}</strong></article> })}</div>

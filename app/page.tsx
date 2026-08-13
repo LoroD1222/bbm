@@ -21,6 +21,7 @@ import { Experience } from "@/components/experience";
 import { InquiryForm } from "@/components/inquiry-form";
 import { LogoMark } from "@/components/logo-mark";
 import { TourCarousel } from "@/components/tour-carousel";
+import { getTripsForList } from "@/lib/trip-data";
 
 const assets = {
   heroLeft: "/assets/figma/reference/hero-left.png",
@@ -54,9 +55,9 @@ const planningSteps = [
 ] as const;
 
 const reviews = [
-  { image: "/assets/figma/reference/review-safari.png", quote: "Our tailor-made safari across the Serengeti and Ngorongoro Crater exceeded every expectation. Seeing the Great Migration up close was a life-changing moment. Everything was timed perfectly.", name: "Sarah & David K.", trip: "Bush & Beach Safari - 12 Days" },
-  { image: "/assets/figma/reference/review-kilimanjaro.png", quote: "Climbing Mount Kilimanjaro via Lemosho was tough, but the BBM team guided us with unbelievable care and expertise. Pushing through summit night was made possible by their incredible crew.", name: "Marcus Chen", trip: "Kilimanjaro Climb Machame - 8 Days" },
-  { image: "/assets/figma/reference/review-zanzibar.png", quote: "Zanzibar was pure paradise. Combining our dusty game drives with quiet, breezy beaches in Stone Town was the ultimate itinerary layout. Having a single contact made it so stress-free.", name: "Elena Petrova", trip: "Wildlife & Zanzibar - 10 Days" },
+  { image: "/assets/testimonials/bbm-guests-vehicle.jpg", quote: "Our tailor-made safari across the Serengeti and Ngorongoro Crater exceeded every expectation. Seeing the Great Migration up close was a life-changing moment. Everything was timed perfectly.", name: "Sarah & David K.", trip: "Bush & Beach Safari - 12 Days" },
+  { image: "/assets/testimonials/bbm-guests-tarangire.jpg", quote: "Climbing Mount Kilimanjaro via Lemosho was tough, but the BBM team guided us with unbelievable care and expertise. Pushing through summit night was made possible by their incredible crew.", name: "Marcus Chen", trip: "Kilimanjaro Climb Machame - 8 Days" },
+  { image: "/assets/testimonials/bbm-guests-safari-vehicle.jpg", quote: "Zanzibar was pure paradise. Combining our dusty game drives with quiet, breezy beaches in Stone Town was the ultimate itinerary layout. Having a single contact made it so stress-free.", name: "Elena Petrova", trip: "Wildlife & Zanzibar - 10 Days" },
 ] as const;
 
 const team = [
@@ -74,7 +75,9 @@ function ArrowLink({ href, children, secondary = false }: Readonly<{ href: strin
   );
 }
 
-export default function Home() {
+export default async function Home() {
+  const trips = await getTripsForList();
+
   return (
     <Experience>
       <main id="top">
@@ -124,7 +127,7 @@ export default function Home() {
                 <Link className="underlined-link" href="/tours">See more tours <ArrowUpRight aria-hidden="true" /></Link>
               </div>
             </div>
-            <TourCarousel />
+            <TourCarousel tours={trips} />
           </div>
         </section>
 

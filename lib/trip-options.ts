@@ -84,6 +84,8 @@ export const monthOptions = [
 const monthIndex = new Map<string, number>(monthOptions.map(({value}, index) => [value, index]))
 
 export function formatMonths(months: string[]) {
+  if (new Set(months).size === monthOptions.length) return 'All year'
+
   return [...months]
     .sort((left, right) => (monthIndex.get(left) ?? 99) - (monthIndex.get(right) ?? 99))
     .map((month) => monthOptions.find(({value}) => value === month)?.title.slice(0, 3) ?? month)

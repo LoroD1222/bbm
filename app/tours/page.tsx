@@ -8,10 +8,10 @@ import { TripsExplorer } from "@/components/trips-explorer";
 import {getTripsForList} from "@/lib/trip-data";
 
 const travelStyles = [
-  { title: "Wildlife Safaris", text: "Untamed natural encounters.", image: "/assets/figma/pages/style-wildlife.png", category: "wildlife-safari" },
-  { title: "Kilimanjaro Treks", text: "Climb the roof of Africa.", image: "/assets/figma/pages/style-kilimanjaro.png", category: "mountain-trekking" },
-  { title: "Safari + Beach", text: "Bush encounters & coastal relaxation.", image: "/assets/figma/pages/style-bush-beach.png", category: "safari-plus-beach" },
-  { title: "Tailor-Made Journeys", text: "Built 100% around your dream.", image: "/assets/figma/pages/style-tailor.png", category: "private-safari" },
+  { title: "Wildlife Safaris", text: "Untamed natural encounters.", image: "/assets/travel-styles/tanzania-wildlife-giraffe.jpg", alt: "Giraffe grazing in Tanzania", position: "center 58%", category: "wildlife-safari" },
+  { title: "Kilimanjaro Treks", text: "Climb the roof of Africa.", image: "/assets/travel-styles/kilimanjaro-trekkers.jpg", alt: "Trekkers climbing Mount Kilimanjaro", position: "center 54%", category: "mountain-trekking" },
+  { title: "Safari + Beach", text: "Bush encounters & coastal relaxation.", image: "/assets/travel-styles/zanzibar-dhows.jpg", alt: "Traditional dhows on a Zanzibar beach", position: "center 58%", category: "safari-plus-beach" },
+  { title: "Tailor-Made Journeys", text: "Built 100% around your dream.", image: "/assets/travel-styles/tanzania-safari-vehicle.jpg", alt: "Safari vehicle travelling through northern Tanzania", position: "center 50%", category: "private-safari" },
 ] as const;
 
 const benefits = [
@@ -22,9 +22,9 @@ const benefits = [
 ] as const;
 
 const reviews = [
-  { image: "/assets/figma/pages/trips-review-01.png", quote: "Our tailor-made safari across the Serengeti and Ngorongoro Crater exceeded every expectation. Seeing the Great Migration up close was a life-changing moment. Everything was timed perfectly.", name: "Sarah & David K.", trip: "Bush & Beach Safari - 12 Days" },
-  { image: "/assets/figma/pages/trips-review-02.png", quote: "Climbing Mount Kilimanjaro via Lemosho was tough, but the BBM team guided us with unbelievable care and expertise. Pushing through summit night was made possible by their incredible crew.", name: "Marcus Chen", trip: "Kilimanjaro Climb Machame - 8 Days" },
-  { image: "/assets/figma/pages/trips-review-03.png", quote: "Zanzibar was pure paradise. Combining our dusty game drives with quiet, breezy beaches in Stone Town was the ultimate itinerary layout. Having a single contact made it so stress-free.", name: "Elena Petrova", trip: "Wildlife & Zanzibar - 10 Days" },
+  { image: "/assets/testimonials/bbm-guests-vehicle.jpg", quote: "Our tailor-made safari across the Serengeti and Ngorongoro Crater exceeded every expectation. Seeing the Great Migration up close was a life-changing moment. Everything was timed perfectly.", name: "Sarah & David K.", trip: "Bush & Beach Safari - 12 Days" },
+  { image: "/assets/testimonials/bbm-guests-tarangire.jpg", quote: "Climbing Mount Kilimanjaro via Lemosho was tough, but the BBM team guided us with unbelievable care and expertise. Pushing through summit night was made possible by their incredible crew.", name: "Marcus Chen", trip: "Kilimanjaro Climb Machame - 8 Days" },
+  { image: "/assets/testimonials/bbm-guests-safari-vehicle.jpg", quote: "Zanzibar was pure paradise. Combining our dusty game drives with quiet, breezy beaches in Stone Town was the ultimate itinerary layout. Having a single contact made it so stress-free.", name: "Elena Petrova", trip: "Wildlife & Zanzibar - 10 Days" },
 ] as const;
 
 export default async function ToursPage() {
@@ -41,8 +41,8 @@ export default async function ToursPage() {
               <div className="trips-hero__metrics"><div><strong>100%</strong><span>Tailor-Made Route Design</span></div><i /><div><strong>120+</strong><span>Summits of Kilimanjaro</span></div></div>
             </div>
             <div className="trips-hero__collage" data-reveal>
-              <div className="trips-hero__mountain"><Image src="/assets/figma/pages/trips-hero-mountain.png" alt="Mount Kilimanjaro at dawn" fill priority sizes="19.375rem" /></div>
-              <div><span><Image src="/assets/figma/pages/trips-hero-safari.png" alt="Elephants on the savanna" fill priority sizes="16.25rem" /></span><span><Image src="/assets/figma/pages/trips-hero-beach.png" alt="Zanzibar lagoon and boat" fill priority sizes="16.25rem" /></span></div>
+              <div className="trips-hero__mountain"><Image src="/assets/figma/pages/trips-hero-balloon-safari.png" alt="Hot-air balloons above the Tanzanian savanna" fill priority sizes="19.375rem" /></div>
+              <div><span><Image src="/assets/figma/pages/trips-hero-kilimanjaro-canoeing.png" alt="Canoeists beneath Mount Kilimanjaro" fill priority sizes="16.25rem" /></span><span><Image src="/assets/figma/pages/trips-hero-mountain-trek.png" alt="Trekkers on the slopes of Mount Kilimanjaro" fill priority sizes="16.25rem" /></span></div>
             </div>
           </div>
         </section>
@@ -52,7 +52,7 @@ export default async function ToursPage() {
         <section className="travel-styles">
           <div className="journey-shell">
             <div className="journey-heading journey-heading--center journey-heading--inverse" data-reveal><p>Choose Your Adventure</p><h2>Browse by Travel Style</h2></div>
-            <div className="travel-styles__grid">{travelStyles.map((style, index) => <article key={style.title} data-reveal style={{ transitionDelay: `${index * 65}ms` }}><div><Image src={style.image} alt="" fill sizes="(max-width: 43.75rem) 86vw, 24vw" /></div><h3>{style.title}</h3><p>{style.text}</p><a href="#all-trips" data-trip-category={style.category}>Explore Style <ArrowUpRight aria-hidden="true" /></a></article>)}</div>
+            <div className="travel-styles__grid">{travelStyles.map((style, index) => <article key={style.title} data-reveal style={{ transitionDelay: `${index * 65}ms` }}><div><Image src={style.image} alt={style.alt} fill sizes="(max-width: 43.75rem) 86vw, 24vw" style={{ objectPosition: style.position }} /></div><h3>{style.title}</h3><p>{style.text}</p><a href="#all-trips" data-trip-category={style.category}>Explore Style <ArrowUpRight aria-hidden="true" /></a></article>)}</div>
           </div>
         </section>
 

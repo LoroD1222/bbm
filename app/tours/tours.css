@@ -80,7 +80,7 @@
 .trip-card__category { display: inline-flex; align-items: center; gap: 0.3125rem; }
 .trip-card__category svg { width: 0.875rem; height: 0.875rem; stroke-width: 2.4; }
 .trip-card__tag { right: 1rem; color: var(--yellow); background: rgba(30,35,31,.9); }
-.trip-card__body { display: grid; gap: 1rem; min-height: 15.1875rem; padding: 1.5rem; }
+.trip-card__body { display: grid; gap: 1rem; min-height: 15.1875rem; padding: 1.5rem 1.75rem 1.5rem 1.5rem; }
 .trip-card__duration { display: flex; align-items: center; gap: 0.5rem; margin: 0; color: rgba(30,35,31,.78); font-size: 0.875rem; font-weight: 650; }
 .trip-card__duration svg { width: 1rem; }
 .trip-card__body h3 { overflow: hidden; font-size: 1.3125rem; font-weight: 700; letter-spacing: -.045em; text-overflow: ellipsis; white-space: nowrap; }
@@ -128,6 +128,9 @@
 .trips-reviews__grid { align-items: start; }
 .trips-reviews__grid article { align-self: start; display: grid; gap: 1.25rem; padding: 1rem; border: 1px solid rgba(30,35,31,.12); border-radius: 1.25rem; background: white; }
 .trips-reviews__grid article > div { position: relative; height: 13.75rem; overflow: hidden; border-radius: 0.75rem; }
+.trips-reviews__grid article:nth-child(1) > div img { object-position: 50% 48%; }
+.trips-reviews__grid article:nth-child(2) > div img { object-position: 50% 44%; }
+.trips-reviews__grid article:nth-child(3) > div img { object-position: 50% 42%; }
 .trips-reviews__grid article:hover img { transform: scale(1.04); }
 .trips-reviews__stars { display: flex; gap: 0.1875rem; margin: 0; color: var(--yellow); }
 .trips-reviews__stars svg { width: 1rem; fill: currentColor; }
@@ -220,11 +223,11 @@
 .detail-overview__intro aside { padding: 1.75rem; border: 1px solid rgba(30,35,31,.12); border-radius: 1rem; background: #f2ecdd; }
 .detail-overview__intro aside h3 { font-size: 1.0625rem; letter-spacing: -.02em; }
 .detail-overview__intro ul { display: grid; gap: 0.75rem; margin: 1.25rem 0 0; padding: 0; list-style: none; }
-.detail-overview__intro li { display: flex; align-items: start; gap: 0.5625rem; font-size: 0.8125rem; font-weight: 650; }
-.detail-overview__intro li svg { flex: none; width: 1.0625rem; color: #8e7400; }
+.detail-overview__intro li { display: flex; align-items: center; gap: 0.5625rem; font-size: 0.8125rem; font-weight: 650; }
+.detail-overview__intro li svg { flex: none; width: 1.5rem; height: 1.5rem; padding: 0.3125rem; border-radius: 50%; color: var(--ink); background: var(--yellow); stroke-width: 3; }
 .detail-overview__facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 3.5rem; }
 .detail-overview__facts article { display: grid; min-height: 8.125rem; align-content: start; padding: 1.125rem; border: 1px solid rgba(30,35,31,.1); border-radius: 0.75rem; background: white; }
-.detail-overview__facts svg { width: 1.25rem; color: #9a7d00; }
+.detail-overview__facts svg { width: 2.25rem; height: 2.25rem; padding: 0.5rem; border-radius: 50%; color: var(--ink); background: var(--yellow); stroke-width: 2.25; }
 .detail-overview__facts span { margin-top: 0.875rem; color: rgba(30,35,31,.6); font-size: 0.625rem; font-weight: 700; text-transform: uppercase; }
 .detail-overview__facts strong { margin-top: 0.25rem; font-size: 0.75rem; }
 
@@ -243,6 +246,7 @@
 .detail-itinerary__image { position: relative; min-height: 11.25rem; overflow: hidden; border-radius: 0.75rem; }
 
 .detail-pricing { position: relative; overflow: hidden; padding: 4.5rem 0; color: white; background: var(--ink) url("/assets/dark-background.jpg") center / cover no-repeat; }
+.detail-pricing .journey-heading > p { width: auto; padding: 0; border-radius: 0; color: var(--yellow); background: transparent; font-size: 0.875rem; letter-spacing: 0.02em; }
 .detail-pricing .detail-pattern { opacity: .08; background: url("/assets/figma/reference/team-pattern.png") center / cover no-repeat; }
 .detail-pricing > .journey-shell { position: relative; }
 .detail-pricing__layout { display: grid; grid-template-columns: 1fr 21.25rem; gap: 2.25rem; align-items: stretch; }
@@ -274,13 +278,13 @@
 .detail-included__grid article:last-child h3 svg, .detail-included__grid article:last-child li svg { color: #8a4848; }
 .detail-lodges { padding: 6rem 0; background: white; }
 .detail-lodges__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.75rem; }
-.detail-lodges article { overflow: hidden; border: 1px solid rgba(30,35,31,.1); border-radius: 0.9375rem; background: #fdfaf4; }
+.detail-lodges article { position: relative; overflow: hidden; padding-bottom: 1.25rem; border: 1px solid rgba(30,35,31,.1); border-radius: 0.9375rem; background: #fdfaf4; }
 .detail-lodges article > div { position: relative; height: 15.3125rem; overflow: hidden; }
 .detail-lodges article:hover img { transform: scale(1.045); }
-.detail-lodges h3, .detail-lodges article > p, .detail-lodges article > span { margin-inline: 1.25rem; }
+.detail-lodges h3, .detail-lodges article > p { margin-inline: 1.25rem; }
 .detail-lodges h3 { margin-top: 1.25rem; font-size: 1.1875rem; }
 .detail-lodges article > p { margin-top: 0.625rem; color: rgba(30,35,31,.7); font-size: 0.75rem; line-height: 1.55; }
-.detail-lodges article > span { display: inline-block; margin-block: 0.625rem 1.25rem; padding: 0.4375rem 0.625rem; border-radius: 0.3125rem; background: var(--yellow); font-size: 0.625rem; font-weight: 700; }
+.detail-lodges article > span { position: absolute; z-index: 2; top: 1rem; left: 1rem; display: inline-block; margin: 0; padding: 0.4375rem 0.625rem; border-radius: 0.3125rem; background: var(--yellow); font-size: 0.625rem; font-weight: 700; }
 
 .detail-gallery { padding: 6rem 0; background: #fdfaf4; }
 .detail-gallery__grid { display: grid; grid-template-columns: 1.45fr 1fr; grid-template-rows: 13.75rem 13.75rem; gap: 1.125rem; }
@@ -359,8 +363,6 @@
 }
 
 @media (min-width: 56.3125rem) {
-  .all-trips-section { min-height: 152.5625rem; }
-  .all-trips-section:has(.all-trips-grid.is-filtered), .all-trips-section:has(.trips-empty) { min-height: 0; }
   .travel-styles { min-height: 43.375rem; }
   .trips-reviews { min-height: 52.625rem; }
   .custom-trip { min-height: 42.75rem; }
@@ -399,7 +401,9 @@
   .trips-hero h1, .detail-hero h1 { font-size: 2.625rem; }
   .trips-hero__copy > p:not(.journey-eyebrow) { font-size: 1rem; }
   .trips-hero__actions, .detail-hero__actions { align-items: stretch; flex-direction: column; }
-  .trips-hero__actions .journey-button { width: 100%; }
+  .trips-hero__actions { flex-direction: row; gap: 0.75rem; }
+  .trips-hero__actions .journey-button { flex: 1; min-width: 0; padding-inline: 1rem 0.75rem; }
+  .trips-hero__actions .journey-button { width: auto; }
   .trips-hero__collage { grid-template-columns: 1.15fr .85fr; width: 100%; height: 20.625rem; }
   .trips-filter__search { grid-template-columns: auto 1fr; height: auto; }
   .trips-filter__search button { grid-column: 1/-1; margin-top: 0.875rem; }
