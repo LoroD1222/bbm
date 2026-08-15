@@ -15,9 +15,11 @@ import {detailAssets} from '@/lib/journeys'
 import {tripImageUrl} from '@/lib/sanity-image'
 import type {TripImage, TripPageData} from '@/lib/trip-types'
 import {Experience} from './experience'
+import {GalleryLightbox} from './gallery-lightbox'
 import {JourneyButton} from './journey-button'
 import {JourneyFooter} from './journey-footer'
 import {JourneyForm} from './journey-form'
+import {TripTypeIcon} from './trip-type-icon'
 
 const usd = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -67,6 +69,11 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
   const includedItems = [...trip.included.map((item) => labelFor(serviceLabel, item)), ...trip.extraIncluded]
   const excludedItems = [...trip.excluded.map((item) => labelFor(serviceLabel, item)), ...trip.extraExcluded]
   const media = [trip.coverImage, ...trip.gallery]
+  const galleryItems = trip.gallery.slice(0, 3).map((image) => ({
+    src: tripImageUrl(image, 1600, 1200),
+    alt: image.alt,
+    label: image.alt,
+  }))
   const travelStyle = trip.atAGlance[0] ? labelFor(atAGlanceLabel, trip.atAGlance[0]) : tripTypeLabel[trip.tripType]
   const locations = trip.itinerary.flatMap((item) => item.locations)
   const start = locations[0] ? labelFor(atAGlanceLabel, locations[0]) : 'Tanzania'
@@ -105,7 +112,7 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
           <div className="detail-pattern" aria-hidden="true" />
           <div className="journey-shell detail-hero__layout">
             <div className="detail-hero__copy" data-reveal>
-              <p className="journey-eyebrow">{tripTypeLabel[trip.tripType]}</p>
+              <p className="journey-eyebrow"><TripTypeIcon tripType={trip.tripType} aria-hidden="true" />{tripTypeLabel[trip.tripType]}</p>
               <p className="detail-breadcrumbs">Tours / {tripTypeLabel[trip.tripType]} / {trip.title}</p>
               <h1 id="detail-title">{trip.title}</h1>
               <p>{trip.summary}</p>
@@ -129,9 +136,11 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
               </div>
             </div>
             <div className="detail-hero__collage" data-reveal aria-label={trip.coverImage ? trip.coverImage.alt : undefined}>
-              <div className="detail-media-slot"><TripImageSlot image={media[0]} alt={media[0]?.alt ?? ''} width={520} height={620} sizes="16.25rem" priority /></div>
-              <div className="detail-media-slot"><TripImageSlot image={media[1]} alt={media[1]?.alt ?? ''} width={720} height={820} sizes="22.5rem" /></div>
-              <span><i className="detail-media-slot"><TripImageSlot image={media[2]} alt={media[2]?.alt ?? ''} width={420} height={420} sizes="13.125rem" /></i><i className="detail-media-slot"><TripImageSlot image={media[3]} alt={media[3]?.alt ?? ''} width={420} height={420} sizes="13.125rem" /></i></span>
+              <div className="detail-media-slot"><TripImageSlot image={media[0]} alt={media[0]?.alt ?? ''} width={720} height={820} sizes="19.375rem" priority /></div>
+              <div>
+                <span className="detail-media-slot"><TripImageSlot image={media[1]} alt={media[1]?.alt ?? ''} width={520} height={420} sizes="16.25rem" /></span>
+                <span className="detail-media-slot"><TripImageSlot image={media[2]} alt={media[2]?.alt ?? ''} width={520} height={420} sizes="16.25rem" /></span>
+              </div>
             </div>
           </div>
         </section>
@@ -164,7 +173,7 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
 
         {trip.accommodationOptions.length > 0 && <section className="detail-lodges"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Where You&apos;ll Sleep</p><h2>Choose your stay style</h2><span>Pick one level or mix different accommodation levels across the itinerary.</span></div><div className="detail-lodges__grid">{trip.accommodationOptions.map((option, index) => <article key={option._key} data-reveal style={{transitionDelay: `${index * 65}ms`}}><div className="detail-media-slot"><TripImageSlot image={option.image} alt={option.image?.alt ?? ''} width={900} height={650} sizes="(max-width: 43.75rem) 88vw, 31vw" /></div><h3>{labelFor(accommodationOptionTitle, option.level)}</h3><p>{option.description}</p>{option.packageNote && <span>{option.packageNote}</span>}</article>)}</div></div></section>}
 
-        {trip.gallery.length > 0 && <section className="detail-gallery"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Captured Moments</p><h2>{trip.title} gallery</h2></div><div className="detail-gallery__grid" data-reveal>{trip.gallery.slice(0, 3).map((image) => <div key={image._key}><TripImageSlot image={image} alt={image.alt} width={960} height={700} sizes="(max-width: 43.75rem) 88vw, 50vw" /><span>{image.alt}</span></div>)}</div></div></section>}
+        {galleryItems.length > 0 && <section className="detail-gallery"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Captured Moments</p><h2>{trip.title} gallery</h2></div><GalleryLightbox items={galleryItems} /></div></section>}
 
         {trip.relatedTrips.length > 0 && <section className="detail-related"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Continue The Adventure</p><h2>Continue your Tanzania journey</h2></div><div className="detail-related__grid">{trip.relatedTrips.map((related, index) => <article key={related._id} data-reveal style={{transitionDelay: `${index * 65}ms`}}><div className="detail-media-slot"><TripImageSlot image={related.coverImage} alt={related.coverImage?.alt ?? ''} width={900} height={620} sizes="(max-width: 43.75rem) 88vw, 31vw" /></div><p>{tripTypeLabel[related.tripType]}<span>{duration(related.days, related.nights)}</span></p><h3>{related.title}</h3><footer><strong>From {usd.format(related.startingPrice)} USD</strong><Link href={related._id.startsWith('fallback-') ? '/#contact' : `/tours/${related.slug}`}>View Trip</Link></footer></article>)}</div></div></section>}
 
