@@ -231,7 +231,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .team__intro { padding-bottom: 1.75rem; }
 .team__intro h2 { color: var(--warm-white); }
 .team__intro > p:not(.section-label) { max-width: 26.25rem; margin: 1.5rem 0 1.75rem; color: rgba(228,225,217,.68); font-size: .86rem; line-height: 1.7; }
-.team__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.team__cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
 .team-card { padding: 0.5rem 0.5rem 1.25rem; border: 1px solid var(--line-inverse); border-radius: 0.875rem; background: rgba(228,225,217,.055); transition: transform var(--base) var(--ease-out), background var(--base) linear; }
 .team-card:hover { transform: translateY(-0.5rem); background: rgba(228,225,217,.11); }
 .team-card:hover img { transform: scale(1.05); }
@@ -342,7 +342,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .review-grid { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: minmax(19.375rem, 76vw); overflow-x: auto; padding: 0 0.125rem 1.25rem; scrollbar-width: none; scroll-snap-type: x mandatory; }
   .review-card { scroll-snap-align: start; }
   .team__intro { max-width: 35rem; }
-  .team__cards { overflow-x: auto; grid-template-columns: repeat(3, minmax(15.625rem,1fr)); padding-bottom: 1rem; scrollbar-width: none; }
+  .team__cards { overflow-x: auto; grid-template-columns: repeat(2, minmax(15.625rem,1fr)); padding-bottom: 1rem; scrollbar-width: none; }
   .contact__layout { grid-template-columns: 1fr; }
   .contact__content { padding: 5.625rem max(1.25rem, calc((100vw - 47.5rem)/2)) 1.875rem; }
   .contact__visual { min-height: 38.75rem; margin: -4.375rem 0 0; clip-path: polygon(0 12%,100% 0,100% 100%,0 100%); }
@@ -625,7 +625,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .team__intro .section-label { margin-bottom: 1.0625rem; font-size: 0.875rem; letter-spacing: 0; }
   .team__intro h2 { font-size: 3rem; }
   .team__intro > p:not(.section-label) { width: 24.5rem; margin: 1.6875rem 0 1.75rem; font-size: 1.125rem; line-height: 1.5; }
-  .team__cards { grid-template-columns: repeat(3, 19.5625rem); gap: 1.3125rem; }
+  .team__cards { grid-template-columns: repeat(2, 19.5625rem); gap: 1.3125rem; }
   .team-card { width: 19.5625rem; height: 21.6875rem; padding: 1.5rem; border-radius: 1rem; text-align: center; }
   .team-card__image { height: 11.25rem; border-radius: 1rem; }
   .team-card h3 { margin: 1.25rem 0 0.5rem; font-size: 1.25rem; }

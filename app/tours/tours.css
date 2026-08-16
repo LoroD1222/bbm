@@ -139,8 +139,7 @@
 .trips-reviews article footer span { color: rgba(30,35,31,.68); font-size: 0.8125rem; }
 
 .custom-trip { position: relative; overflow: hidden; padding: 6rem 0; color: white; background: var(--ink) url("/assets/dark-background.jpg") center / cover no-repeat; isolation: isolate; }
-.custom-trip__background { z-index: 0; object-fit: cover; object-position: center 52%; opacity: .48; }
-.custom-trip::before { position: absolute; z-index: 1; inset: 0; opacity: .72; background: linear-gradient(90deg, rgba(18,23,19,.95), rgba(18,23,19,.72)), linear-gradient(125deg,transparent 0 50%,rgba(255,255,255,.12)); content: ""; pointer-events: none; }
+.custom-trip__background { z-index: 0; object-fit: cover; object-position: center; }
 .custom-trip__layout { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; }
 .custom-trip__layout > div:first-child { max-width: 32.5rem; }
 .custom-trip h2 { margin: 0.875rem 0 1.125rem; font-size: 3rem; font-weight: 700; }
@@ -332,8 +331,7 @@
 .detail-related article footer a { font-weight: 700; text-decoration: underline; }
 
 .detail-enquiry { position: relative; overflow: hidden; padding: 6rem 0; color: white; background: var(--ink); isolation: isolate; }
-.detail-enquiry::after { position: absolute; z-index: 1; inset: 0; background: linear-gradient(90deg, rgba(18,23,19,.9) 0%, rgba(18,23,19,.76) 46%, rgba(18,23,19,.58) 100%), linear-gradient(180deg, rgba(18,23,19,.12), rgba(18,23,19,.44)); content: ""; pointer-events: none; }
-.detail-enquiry__background { z-index: 0; object-fit: cover; object-position: center 52%; opacity: 1; }
+.detail-enquiry__background { z-index: 0; object-fit: cover; object-position: center; }
 .detail-enquiry__layout { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 35rem; align-items: center; gap: 4rem; }
 .detail-enquiry h2 { max-width: 32.5rem; font-size: 2.75rem; font-weight: 700; }
 .detail-enquiry__layout > div:first-child > p { max-width: 33.75rem; margin-top: 1.125rem; color: rgba(255,255,255,.64); line-height: 1.65; }

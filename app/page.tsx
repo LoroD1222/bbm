@@ -61,9 +61,8 @@ const reviews = [
 ] as const;
 
 const team = [
-  { name: "Godlisten Mosha", role: "Kilimanjaro Expedition Lead", description: "Successfully summited Uhuru Peak over 120 times.", image: "/assets/figma/reference/team-godlisten.png", position: "50% 38%" },
-  { name: "Naila Salim", role: "Zanzibar Experience Liaison", description: "Curates spice tours and beachfront stays.", image: "/assets/figma/reference/team-naila.png", position: "50% 45%" },
-  { name: "Amos Mwanga", role: "Serengeti Safari Guide", description: "Leads Great Migration and Big Five wildlife drives.", image: "/assets/figma/reference/team-amos.png", position: "50% 42%" },
+  { name: "Patrick", role: "Guide", description: "Local guide for tailor-made Tanzania journeys.", image: "/assets/team/patrick.jpg", position: "50% 42%" },
+  { name: "Winfried", role: "Guide", description: "Local guide for tailor-made Tanzania journeys.", image: "/assets/team/winfried.jpg", position: "50% 40%" },
 ] as const;
 
 function ArrowLink({ href, children, secondary = false }: Readonly<{ href: string; children: React.ReactNode; secondary?: boolean }>) {

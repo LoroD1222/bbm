@@ -71,7 +71,7 @@ export default async function ToursPage() {
         </section>
 
         <section className="custom-trip" id="custom-trip">
-          <Image className="custom-trip__background" src="/assets/figma/pages/detail-enquiry.png" alt="" fill sizes="100vw" />
+          <Image className="custom-trip__background" src="/assets/figma/pages/custom-cta-section.jpg" alt="" fill sizes="100vw" />
           <div className="journey-shell custom-trip__layout">
             <div data-reveal><p className="journey-eyebrow">Tailor-Made Tanzania</p><h2>Not seeing your perfect trip?</h2><p>Tell us how you want to travel and our local experts will design a Tanzania journey completely around you. Routes, park permits, lodgings, and flights managed in one single plan.</p><ul><li><Mail aria-hidden="true" />info@bbmsafaris.com</li><li><Phone aria-hidden="true" />+255 757 662 052</li></ul></div>
             <div data-reveal><JourneyForm /></div>

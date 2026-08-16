@@ -148,5 +148,5 @@ export const detailAssets = {
   relatedOne: `${assetRoot}/detail-related-01.png`,
   relatedTwo: `${assetRoot}/detail-related-02.png`,
   relatedThree: `${assetRoot}/detail-related-03.png`,
-  enquiry: `${assetRoot}/detail-enquiry.png`,
+  enquiry: `${assetRoot}/enquiry-section.jpg`,
 } as const;
