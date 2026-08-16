@@ -47,8 +47,12 @@ function labelFor(labels: Record<string, string>, value: string) {
   return labels[value] ?? value
 }
 
+function hasTripImage(image: TripImage | null | undefined): image is TripImage {
+  return Boolean(image?.src || image?.asset?.url)
+}
+
 function imageUrl(image: TripImage | null | undefined, width: number, height: number) {
-  return image ? tripImageUrl(image, width, height) : null
+  return hasTripImage(image) ? tripImageUrl(image, width, height) : null
 }
 
 function TripImageSlot({
@@ -199,7 +203,10 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
           </div>
         </section>
 
-        {trip.accommodationOptions.length > 0 && <section className="detail-lodges"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Where You&apos;ll Sleep</p><h2>Choose your stay style</h2><span>Pick one level or mix different accommodation levels across the itinerary.</span></div><div className="detail-lodges__grid">{trip.accommodationOptions.map((option, index) => <article key={option._key} data-reveal style={{transitionDelay: `${index * 65}ms`}}><div className="detail-media-slot"><TripImageSlot image={option.image} alt={option.image?.alt ?? ''} width={900} height={650} sizes="(max-width: 43.75rem) 88vw, 31vw" /></div><h3>{labelFor(accommodationOptionTitle, option.level)}</h3><p>{option.description}</p>{option.packageNote && <span>{option.packageNote}</span>}</article>)}</div></div></section>}
+        {trip.accommodationOptions.length > 0 && <section className="detail-lodges"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Where You&apos;ll Sleep</p><h2>Choose your stay style</h2><span>Pick one level or mix different accommodation levels across the itinerary.</span></div><div className="detail-lodges__grid">{trip.accommodationOptions.map((option, index) => {
+          const image = hasTripImage(option.image) ? option.image : null
+          return <article className={image ? undefined : 'detail-lodges__card--text-only'} key={option._key} data-reveal style={{transitionDelay: `${index * 65}ms`}}>{image && <div className="detail-media-slot"><TripImageSlot image={image} alt={image.alt ?? ''} width={900} height={650} sizes="(max-width: 43.75rem) 88vw, 31vw" /></div>}{option.packageNote && <span>{option.packageNote}</span>}<h3>{labelFor(accommodationOptionTitle, option.level)}</h3><p>{option.description}</p></article>
+        })}</div></div></section>}
 
         {galleryItems.length > 0 && <section className="detail-gallery"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Captured Moments</p><h2>{trip.title} gallery</h2></div><GalleryLightbox items={galleryItems} /></div></section>}
 
