@@ -97,6 +97,7 @@ export const itineraryActivityOptions = [
   {title: 'Morning game drive', value: 'morning-game-drive'}, {title: 'Afternoon game drive', value: 'afternoon-game-drive'},
   {title: 'Full-day game drive', value: 'full-day-game-drive'}, {title: 'Walking safari', value: 'walking-safari'},
   {title: 'Night game drive', value: 'night-game-drive'}, {title: 'Scenic drive', value: 'scenic-drive'},
+  {title: 'Birdwatching', value: 'birdwatching'},
   {title: 'Domestic flight', value: 'domestic-flight'}, {title: 'Cultural visit', value: 'cultural-visit'},
   {title: 'Bush lunch', value: 'bush-lunch'}, {title: 'Bush dinner', value: 'bush-dinner'},
   {title: 'Sundowner', value: 'sundowner'}, {title: 'Balloon safari', value: 'balloon-safari'},

@@ -39,6 +39,12 @@ const travelerReviews = [
   {image: '/assets/testimonials/bbm-guests-safari-vehicle.jpg', quote: 'Zanzibar was pure paradise. Combining our dusty game drives with quiet, breezy beaches in Stone Town was the ultimate itinerary layout. Having a single contact made it so stress-free.', name: 'Elena Petrova', trip: 'Wildlife & Zanzibar - 10 Days'},
 ] as const
 
+const accommodationPlaceholderByLevel: Record<string, string> = {
+  classic: '/assets/figma/pages/detail-lodge-classic.png',
+  comfort: '/assets/figma/pages/detail-lodge-comfort.png',
+  luxury: '/assets/figma/pages/detail-lodge-premium.png',
+}
+
 function duration(days: number, nights: number) {
   return `${days} ${days === 1 ? 'Day' : 'Days'} / ${nights} ${nights === 1 ? 'Night' : 'Nights'}`
 }
@@ -204,8 +210,11 @@ export function TripDetail({trip}: Readonly<{trip: TripPageData}>) {
         </section>
 
         {trip.accommodationOptions.length > 0 && <section className="detail-lodges"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Where You&apos;ll Sleep</p><h2>Choose your stay style</h2><span>Pick one level or mix different accommodation levels across the itinerary.</span></div><div className="detail-lodges__grid">{trip.accommodationOptions.map((option, index) => {
-          const image = hasTripImage(option.image) ? option.image : null
-          return <article className={image ? undefined : 'detail-lodges__card--text-only'} key={option._key} data-reveal style={{transitionDelay: `${index * 65}ms`}}>{image && <div className="detail-media-slot"><TripImageSlot image={image} alt={image.alt ?? ''} width={900} height={650} sizes="(max-width: 43.75rem) 88vw, 31vw" /></div>}{option.packageNote && <span>{option.packageNote}</span>}<h3>{labelFor(accommodationOptionTitle, option.level)}</h3><p>{option.description}</p></article>
+          const image: TripImage = hasTripImage(option.image) ? option.image : {
+            src: accommodationPlaceholderByLevel[option.level] ?? accommodationPlaceholderByLevel.classic,
+            alt: '',
+          }
+          return <article key={option._key} data-reveal style={{transitionDelay: `${index * 65}ms`}}><div className="detail-media-slot"><TripImageSlot image={image} alt={image.alt} width={900} height={650} sizes="(max-width: 43.75rem) 88vw, 31vw" /></div>{option.packageNote && <span>{option.packageNote}</span>}<h3>{labelFor(accommodationOptionTitle, option.level)}</h3><p>{option.description}</p></article>
         })}</div></div></section>}
 
         {galleryItems.length > 0 && <section className="detail-gallery"><div className="journey-shell"><div className="journey-heading journey-heading--left" data-reveal><p>Captured Moments</p><h2>{trip.title} gallery</h2></div><GalleryLightbox items={galleryItems} /></div></section>}

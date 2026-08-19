@@ -256,9 +256,11 @@ export default async function Home() {
               {team.map((person, index) => (
                 <article className="team-card" key={person.name} data-reveal style={{ transitionDelay: `${index * 70}ms` }}>
                   <div className="team-card__image image-frame"><Image src={person.image} alt={person.name} fill sizes="(max-width: 47.5rem) 70vw, 17.5rem" style={{ objectPosition: person.position }} /></div>
-                  <h3>{person.name}</h3>
-                  <p>{person.role}</p>
-                  <span>{person.description}</span>
+                  <div className="team-card__content">
+                    <h3>{person.name}</h3>
+                    <p>{person.role}</p>
+                    <span>{person.description}</span>
+                  </div>
                 </article>
               ))}
             </div>
